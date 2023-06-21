@@ -1,2 +1,2 @@
 # password-generator
-This is a solo project.
+This website creates strong passwords that are randomly generated
