@@ -80,6 +80,7 @@ function changeLimitText() {
   } else if (maxCharEl.value < 0) {
     maxCharEl.value = 0
   }
+  
   maxCharSliderEl.value = maxCharEl.value
   numberOfCharacters = maxCharSliderEl.value;
 }
