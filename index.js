@@ -80,13 +80,18 @@ function changeLimitText() {
   } else if (maxCharEl.value < 0) {
     maxCharEl.value = 0
   }
-  
   maxCharSliderEl.value = maxCharEl.value
   numberOfCharacters = maxCharSliderEl.value;
 }
 
 function toggleSpecialCharacters() {
   useSpecialCharacters = specialCharEl.checked;
+  if (specialCharTextarea.getAttribute("disabled") === "") {
+    specialCharTextarea.removeAttribute("disabled")
+  } else {
+    specialCharTextarea.setAttribute("disabled", "")
+  }
+  
 }
 
 function changeSpecialChar() {
