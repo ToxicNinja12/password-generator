@@ -12,7 +12,7 @@ const checkIcon = document.getElementById("check-icon");
 const hiddenIcon = document.getElementById("hidden-icon");
 const visibleIcon = document.getElementById("visible-icon");
 
-let numberOfCharacters = maxCharEl.textContent;
+let numberOfCharacters = maxCharEl.value;
 let useSpecialCharacters = specialCharEl.checked;
 let normalCharacters =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
