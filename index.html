@@ -24,11 +24,12 @@
         -webkit-appearance: none;
         margin: 0;
       }
+
     </style>
   </head>
 
   <body>
-    <div class="container py-5 px-4 px-md-5">
+    <div class="container py-5 px-4 px-lg-5">
 
       <h1 class="mt-5">Password Generator</h1>
       <p>
@@ -110,20 +111,21 @@
         </div>
 
         <div class="row mt-5">
-          <div class="col-12 col-lg-8">
+          <div class="col-12 col-lg-8 mt-lg-3">
             <label for="max-character-slider-el" class="form-label d-flex justify-content-between">
               Maximum characters
               <input type="number" class="me-1 form-control py-0 px-1" id="max-character-el" value="15" min="0" max="30" onchange="changeLimitText()"/>
             </label>
             <input type="range" class="form-range" id="max-character-slider-el" min="0" max="30" value="15" oninput="changeLimit()" />
-            <div class="form-check form-switch mt-1">
-              <label class="form-check-label" for="special-char-el">Use special characters</label>
-              <input class="form-check-input" type="checkbox" role="switch" id="special-char-el" checked oninput="toggleSpecialCharacters()" />
-            </div>
           </div>
 
           <div class="col-12 col-lg-4 mt-4 mt-lg-0">
-            <label for="special-char-textarea" class="form-label">Special Characters</label>
+            <div class="d-flex justify-content-between">
+              <label for="special-char-el" class="form-label">Special Characters</label>
+              <div class="form-check form-switch">
+                <input class="form-check-input ms-1" type="checkbox" role="switch" id="special-char-el" checked oninput="toggleSpecialCharacters()" />
+              </div>
+            </div>
             <textarea class="form-control" id="special-char-textarea" rows="2" oninput="changeSpecialChar()">!.,#$%^_-?*()&[]</textarea>
           </div>
         </div>
