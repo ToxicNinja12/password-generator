@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Generator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="container py-5 px-5">
+
+      <h1 class="mt-5">Password Generator</h1>
+      <p>
+        <em>
+          Click generate to create a strong password that you can use anywhere!
+        </em>
+      </p>
+
+      <form class="mt-5">
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" id="password-el" disabled />
+          <button type="button" title="Copy to clipboard" class="btn btn-outline-secondary" onclick="copyPass()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="align-text-top"
+              id="clipboard-icon"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-clipboard-fill"
+              viewBox="0 0 16 16">
+              <path
+                fill-rule="evenodd"
+                d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z" />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="align-text-bottom d-none"
+              id="check-icon"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-check2"
+              viewBox="0 0 16 16">
+              <path
+                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="d-flex justify-content-end gap-1">
+          <button type="button" class="btn btn-secondary" title="Toggle visibility" onclick="toggleVisibility()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="align-text-bottom"
+              id="hidden-icon"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-eye-slash-fill"
+              viewBox="0 0 16 16">
+              <path
+                d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z" />
+              <path
+                d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z" />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="align-text-bottom d-none"
+              id="visible-icon"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-eye-fill"
+              viewBox="0 0 16 16">
+              <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+              <path
+                d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+            </svg>
+          </button>
+
+          <button type="button" class="btn btn-primary" id="button-el" title="Generate password" onclick="generatePass()">
+            <div id="button-text">Generate Password</div>
+            <div class="d-none" id="loading-el">
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Loading...
+            </div>
+          </button>
+        </div>
+
+        <div class="row mt-5">
+          <div class="col-12 col-lg-8">
+            <label for="max-character-slider-el" class="form-label d-flex justify-content-between">
+              Maximum characters
+              <span class="me-1" id="max-character-el">15</span>
+            </label>
+            <input type="range" class="form-range" id="max-character-slider-el" min="0" max="30" value="15" oninput="changeLimit()" />
+            <div class="form-check form-switch mt-1">
+              <label class="form-check-label" for="special-char-el">Use special characters</label>
+              <input class="form-check-input" type="checkbox" role="switch" id="special-char-el" checked oninput="toggleSpecialCharacters()" />
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-4 mt-4 mt-lg-0">
+            <label for="special-char-textarea" class="form-label">Special Characters</label>
+            <textarea class="form-control" id="special-char-textarea" rows="2" oninput="changeSpecialChar()">
+              !.,#$%^_-?*()&[]
+            </textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script src="index.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    >
+    </script>
+  </body>
+</html>
