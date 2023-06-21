@@ -10,6 +10,22 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
+    <style>
+
+      input[type="number"] {
+        height: 1.5rem;
+        width: 2.5rem;
+        text-align: center;
+        -moz-appearance: textfield;
+      }
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+    </style>
   </head>
 
   <body>
@@ -98,7 +114,7 @@
           <div class="col-12 col-lg-8">
             <label for="max-character-slider-el" class="form-label d-flex justify-content-between">
               Maximum characters
-              <span class="me-1" id="max-character-el">15</span>
+              <input type="number" class="me-1 form-control py-0 px-1" id="max-character-el" value="15" min="0" max="30" onchange="changeLimitText()"/>
             </label>
             <input type="range" class="form-range" id="max-character-slider-el" min="0" max="30" value="15" oninput="changeLimit()" />
             <div class="form-check form-switch mt-1">
